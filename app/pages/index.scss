@@ -1,0 +1,105 @@
+@reference "tailwindcss";
+
+.professionals-listing {
+  @apply min-h-screen bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8;
+}
+
+.professionals-listing__shell {
+  @apply mx-auto flex w-full max-w-7xl flex-col gap-6;
+}
+
+.professionals-listing__header {
+  @apply flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between;
+}
+
+.professionals-listing__eyebrow {
+  @apply text-sm font-medium uppercase tracking-wide text-cyan-700;
+}
+
+.professionals-listing__title {
+  @apply mt-2 text-3xl font-bold text-slate-950 sm:text-4xl;
+}
+
+.professionals-listing__search {
+  @apply w-full sm:max-w-sm;
+}
+
+.professionals-listing__sr-only {
+  @apply sr-only;
+}
+
+.professionals-listing__filters {
+  @apply grid gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto];
+}
+
+.professionals-listing__clear-button {
+  @apply self-end rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyan-500 hover:text-cyan-700 disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.professionals-listing__result-count {
+  @apply text-sm text-slate-600;
+}
+
+.professionals-listing__grid {
+  @apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.professionals-listing__empty {
+  @apply rounded-lg border border-dashed border-slate-300 bg-white px-4 py-10 text-center;
+}
+
+.professionals-listing__empty-title {
+  @apply text-lg font-semibold text-slate-950;
+}
+
+.professionals-listing__empty-description {
+  @apply mt-2 text-sm text-slate-600;
+}
+
+.professional-card {
+  @apply flex min-h-44 flex-col rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md;
+}
+
+.professional-card__header {
+  @apply flex items-start gap-4;
+}
+
+.professional-card__avatar {
+  @apply h-16 w-16 rounded-full border border-slate-200 object-cover;
+}
+
+.professional-card__summary {
+  @apply min-w-0 flex-1;
+}
+
+.professional-card__name {
+  @apply truncate text-lg font-semibold text-slate-950;
+}
+
+.professional-card__profession {
+  @apply mt-1 line-clamp-2 text-sm text-slate-600;
+}
+
+.professional-card__body {
+  @apply mt-4 flex flex-1 flex-col justify-end gap-3;
+}
+
+.professional-card__email {
+  @apply truncate text-sm text-cyan-700 hover:text-cyan-900;
+}
+
+.professional-card__price {
+  @apply flex items-center justify-between gap-3 border-t border-slate-100 pt-3;
+}
+
+.professional-card__price-label {
+  @apply text-sm text-slate-500;
+}
+
+.professional-card__price-value {
+  @apply text-base font-bold text-slate-950;
+}
+
+.professional-card__profile-link {
+  @apply inline-flex items-center justify-center rounded-lg bg-cyan-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-cyan-800;
+}

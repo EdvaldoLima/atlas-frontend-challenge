@@ -1,0 +1,31 @@
+{
+  "name": "atlas-frontend-challenge",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^1.0.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "nuxt": "^4.5.2",
+    "pinia": "^4.0.3",
+    "tailwindcss": "^4.3.3",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/test-utils": "^2.5.0",
+    "happy-dom": "^20.13.2",
+    "sass-embedded": "^1.103.1",
+    "vitest": "^5.0.0"
+  }
+}
