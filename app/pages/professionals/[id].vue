@@ -40,9 +40,15 @@ const { fullName } = useProfessionalSeo(selectedProfessional, professionalId);
       <section class="professional-profile">
         <div class="professional-profile__grid">
           <div class="professional-profile__media">
-            <img
+            <NuxtImg
               :src="professional.image"
               :alt="`Foto de ${professional.firstName}`"
+              width="300"
+              height="300"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+              :placeholder="[32, 32, 60, 8]"
               class="professional-profile__avatar"
             />
           </div>
@@ -143,13 +149,19 @@ const { fullName } = useProfessionalSeo(selectedProfessional, professionalId);
       >
         <h2 class="professional-detail__section-title">Galeria</h2>
         <div class="professional-detail__gallery">
-          <img
+          <NuxtImg
             v-for="(image, index) in professional.gallery"
             :key="image"
             :src="image"
             :alt="`Imagem ${index + 1} do trabalho de ${professional.firstName}`"
-            class="professional-detail__gallery-image"
+            width="640"
+            height="420"
+            sizes="sm:100vw md:50vw lg:33vw"
             loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            :placeholder="[32, 21, 60, 8]"
+            class="professional-detail__gallery-image"
           />
         </div>
       </section>

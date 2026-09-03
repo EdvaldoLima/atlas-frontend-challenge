@@ -63,6 +63,7 @@ npm run generate
 ## Ferramentas usadas
 
 - **Nuxt 4**: usado como base da aplicação, organizando rotas, renderização, configurações globais e API interna.
+- **Nuxt Image**: usado para otimizar imagens, definir dimensões, gerar placeholders e melhorar o carregamento visual.
 - **Vue 3**: usado para construir interfaces com componentes e Composition API.
 - **Pinia**: usado para centralizar estados compartilhados entre páginas e componentes.
 - **Tailwind CSS 4**: usado para estilos utilitários globais quando fizer sentido.
