@@ -122,16 +122,21 @@ const {
         class="professionals-listing__grid"
       >
         <article
-          v-for="professional in paginatedProfessionals"
+          v-for="(professional, index) in paginatedProfessionals"
           :key="professional.id"
           class="professional-card"
         >
           <div class="professional-card__header">
-            <img
+            <NuxtImg
               :src="professional.image"
               :alt="`Foto de ${professional.firstName}`"
+              width="64"
+              height="64"
+              :loading="index < 8 ? 'eager' : 'lazy'"
+              decoding="async"
+              :fetchpriority="index < 4 ? 'high' : 'low'"
+              :placeholder="[16, 16, 60, 8]"
               class="professional-card__avatar"
-              loading="lazy"
             />
 
             <div class="professional-card__summary">

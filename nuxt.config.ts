@@ -4,8 +4,18 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/image'],
   css: ['~/assets/css/tailwind.css'],
+  image: {
+    domains: [
+      'avatars.githubusercontent.com',
+      'cdn.jsdelivr.net',
+      'fastly.picsum.photos',
+      'picsum.photos',
+    ],
+    format: ['webp'],
+    quality: 80,
+  },
   app: {
     head: {
       htmlAttrs: {
