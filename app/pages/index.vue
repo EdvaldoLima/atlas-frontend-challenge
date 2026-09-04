@@ -45,10 +45,15 @@ const {
   displayedStart,
   handlePageChange,
   paginatedItems: paginatedProfessionals,
+  resetPage,
   totalItems,
   totalPages,
 } = usePagination(filteredProfessionals, {
   pageSize: 50,
+});
+
+watch([searchTerm, selectedPriceRange, selectedSort], () => {
+  void resetPage();
 });
 </script>
 <template>
