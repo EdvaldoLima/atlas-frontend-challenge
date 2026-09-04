@@ -42,14 +42,26 @@ export const usePagination = <T>(
     Math.min(currentPage.value * pageSize, totalItems.value),
   );
 
-  const handlePageChange = async (page: number) => {
+  const updatePageQuery = async (page: number) => {
     await navigateTo({
       query: {
         ...route.query,
         [queryKey]: page === 1 ? undefined : page,
       },
     });
+  };
+
+  const handlePageChange = async (page: number) => {
+    await updatePageQuery(page);
     document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const resetPage = async () => {
+    if (currentPage.value === 1 && route.query[queryKey] === undefined) {
+      return;
+    }
+
+    await updatePageQuery(1);
   };
 
   return {
@@ -58,6 +70,7 @@ export const usePagination = <T>(
     displayedStart,
     handlePageChange,
     paginatedItems,
+    resetPage,
     totalItems,
     totalPages,
   };
