@@ -7,14 +7,56 @@ import { useProfessionalsStore } from "~/stores/professionals";
 import { formatCurrency } from "~/utils/formatCurrency";
 
 const professionalsStore = useProfessionalsStore();
+const route = useRoute();
 
 await professionalsStore.fetchProfessionals();
 
 useHomeSeo();
 
-const searchTerm = ref("");
-const selectedPriceRange = ref<ProfessionalPriceRange>("all");
-const selectedSort = ref<ProfessionalSort>("default");
+const priceRangeValues = [
+  "all",
+  "up-to-100",
+  "100-to-250",
+  "250-to-400",
+  "above-400",
+] satisfies ProfessionalPriceRange[];
+
+const sortValues = [
+  "default",
+  "name-asc",
+  "price-asc",
+  "price-desc",
+] satisfies ProfessionalSort[];
+
+const getQueryValue = (value: (typeof route.query)[string] | undefined) =>
+  Array.isArray(value) ? value[0] : value;
+
+const getSearchTermFromQuery = () =>
+  getQueryValue(route.query.search)?.toString() ?? "";
+
+const getPriceRangeFromQuery = (): ProfessionalPriceRange => {
+  const priceRange = getQueryValue(route.query.priceRange);
+
+  return typeof priceRange === "string" &&
+    priceRangeValues.includes(priceRange as ProfessionalPriceRange)
+    ? (priceRange as ProfessionalPriceRange)
+    : "all";
+};
+
+const getSortFromQuery = (): ProfessionalSort => {
+  const sort = getQueryValue(route.query.sort);
+
+  return typeof sort === "string" &&
+    sortValues.includes(sort as ProfessionalSort)
+    ? (sort as ProfessionalSort)
+    : "default";
+};
+
+const searchTerm = ref(getSearchTermFromQuery());
+const selectedPriceRange = ref<ProfessionalPriceRange>(
+  getPriceRangeFromQuery(),
+);
+const selectedSort = ref<ProfessionalSort>(getSortFromQuery());
 
 const priceRanges = [
   { label: "Todos os valores", value: "all" },
@@ -45,15 +87,39 @@ const {
   displayedStart,
   handlePageChange,
   paginatedItems: paginatedProfessionals,
-  resetPage,
   totalItems,
   totalPages,
 } = usePagination(filteredProfessionals, {
   pageSize: 50,
 });
 
-watch([searchTerm, selectedPriceRange, selectedSort], () => {
-  void resetPage();
+watch(
+  () => route.query,
+  () => {
+    searchTerm.value = getSearchTermFromQuery();
+    selectedPriceRange.value = getPriceRangeFromQuery();
+    selectedSort.value = getSortFromQuery();
+  },
+);
+
+watch([searchTerm, selectedPriceRange, selectedSort], async () => {
+  const nextSearchTerm = searchTerm.value.trim();
+
+  await navigateTo(
+    {
+      query: {
+        ...route.query,
+        page: undefined,
+        priceRange:
+          selectedPriceRange.value === "all"
+            ? undefined
+            : selectedPriceRange.value,
+        search: nextSearchTerm || undefined,
+        sort: selectedSort.value === "default" ? undefined : selectedSort.value,
+      },
+    },
+    { replace: true },
+  );
 });
 </script>
 <template>
@@ -172,7 +238,10 @@ watch([searchTerm, selectedPriceRange, selectedSort], () => {
             </div>
 
             <NuxtLink
-              :to="`/professionals/${professional.id}`"
+              :to="{
+                path: `/professionals/${professional.id}`,
+                query: route.query,
+              }"
               class="professional-card__profile-link"
             >
               Ver perfil

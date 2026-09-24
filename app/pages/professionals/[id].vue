@@ -31,7 +31,7 @@ const { fullName } = useProfessionalSeo(selectedProfessional, professionalId);
   >
     <section class="professional-detail__shell">
       <NuxtLink
-        to="/"
+        :to="{ path: '/', query: route.query }"
         class="professional-detail__back-link"
       >
         Voltar ao catalogo
